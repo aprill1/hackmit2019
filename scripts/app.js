@@ -4,6 +4,8 @@
  * Used code from https://github.com/mdn/web-dictaphone
  */
 
+//  import { processTextFunction } from 'text_processing.js';
+
 // set up basic variables for app
 
 var record = document.querySelector('.record');
@@ -11,6 +13,7 @@ var stop = document.querySelector('.stop');
 var soundClips = document.querySelector('.sound-clips');
 var canvas = document.querySelector('.visualizer');
 var mainSection = document.querySelector('.main-controls');
+var track = document.querySelector('.track');
 
 // disable stop button while not recording
 
@@ -54,6 +57,15 @@ if (navigator.mediaDevices.getUserMedia) {
 
       stop.disabled = true;
       record.disabled = false;
+
+      // processTextFunction here
+    }
+
+    track.onclick = function() {
+        var input = document.querySelector('input');
+        var wordToTrack = [input.value];
+        input.value = '';
+        addToFillers(wordToTrack);
     }
 
     mediaRecorder.onstop = function(e) {
