@@ -112,9 +112,12 @@ if (navigator.mediaDevices.getUserMedia) {
         } else {
           clipLabel.textContent = newClipName;
         }
-      }
+      };
 
-      uploadToAPI(blob);
+      (async() => {
+        await uploadToAPI(blob);
+      })()
+      
     }
 
     mediaRecorder.ondataavailable = function(e) {
@@ -196,6 +199,7 @@ async function uploadToAPI(URL)
 {
     async function getTranscript(id)
     {
+      return new Promise(function(resolve, reject) {
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open("GET", "https://api.rev.ai/speechtotext/v1/jobs/" + id + "/transcript", true); // true for asynchronous
         xmlHttp.setRequestHeader("Authorization", "Bearer 02BxYhsK1vX4kf7yVf2vqWWIxk3dyFq6zvK4PMAgWGnmSotRvBY-8x7bRigOeaQ6rg9Hf8aNpLUUmj3bo-hkkFZwpyefo");
@@ -204,14 +208,17 @@ async function uploadToAPI(URL)
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
             {
                 console.log(xmlHttp.responseText);
-                return xmlHttp.responseText;
+                resolve(xmlHttp.responseText);
             }
         } 
         xmlHttp.send(null);
+      });
     }
 
     async function checkStatus(id)
     {
+      return new Promise(function(resolve, reject)
+      {
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open("GET", "https://api.rev.ai/speechtotext/v1/jobs/" + id, true); // true for asynchronous 
         xmlHttp.setRequestHeader("Authorization", "Bearer 02BxYhsK1vX4kf7yVf2vqWWIxk3dyFq6zvK4PMAgWGnmSotRvBY-8x7bRigOeaQ6rg9Hf8aNpLUUmj3bo-hkkFZwpyefo");
@@ -219,29 +226,34 @@ async function uploadToAPI(URL)
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
             {
                 console.log(xmlHttp.responseText);
-                return xmlHttp.responseText;
+                resolve(xmlHttp.responseText);
             }
         }
         xmlHttp.send(null);
+      });
     }
 
-    async function sendFileAsync(url)
+    function sendFileAsync(url)
     {
+      return new Promise(function(resolve, reject)
+      {
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("POST", "https://api.rev.ai/speechtotext/v1/jobs", true); // true for asynchronous 
-        xmlHttp.setRequestHeader("Authorization", "Bearer 02BxYhsK1vX4kf7yVf2vqWWIxk3dyFq6zvK4PMAgWGnmSotRvBY-8x7bRigOeaQ6rg9Hf8aNpLUUmj3bo-hkkFZwpyefo");
-        xmlHttp.onreadystatechange = function() { 
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            {
-                console.log(xmlHttp.responseText);
-                return xmlHttp.responseText;
-            }
-        }
-        var asForm = new FormData();
+          xmlHttp.open("POST", "https://api.rev.ai/speechtotext/v1/jobs", true); // true for asynchronous 
+          xmlHttp.setRequestHeader("Authorization", "Bearer 02BxYhsK1vX4kf7yVf2vqWWIxk3dyFq6zvK4PMAgWGnmSotRvBY-8x7bRigOeaQ6rg9Hf8aNpLUUmj3bo-hkkFZwpyefo");
+          xmlHttp.onreadystatechange = function() { 
+              if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+              {
+                  console.log("successful send");
+                  console.log(xmlHttp.responseText);
+                  resolve(xmlHttp.responseText);
+              }
+          }
+          var asForm = new FormData();
 
-        asForm.append("media", url);// new File(url, "myfile.ogg"));
-        asForm.append("type", "audio/ogg");
-        xmlHttp.send(asForm);
+          asForm.append("media", url);// new File(url, "myfile.ogg"));
+          asForm.append("type", "audio/ogg");
+          xmlHttp.send(asForm);
+      });
     }
 
   console.log("---------- uploading to API ----------");
@@ -269,18 +281,22 @@ async function uploadToAPI(URL)
    * Use the callback_url option (see: https://www.rev.ai/docs#section/Node-SDK)
    * to receive the response asynchronously on job completion
    */
-
-  while((jobStatus = (await JSON.parse(checkStatus(job.id)).status)) == "in_progress")
+  var jsonStatus = await checkStatus(job.id);
+  var jobStatus = JSON.parse(jsonStatus).status;
+  while( jobStatus == "in_progress")
   {  
       console.log(`Job ${job.id} is ${jobStatus}`);
-      await new Promise( resolve => setTimeout(resolve, 5000));
+      await new Promise( resolve => setTimeout(resolve, 1000));
+      jsonStatus = await checkStatus(job.id);
+      jobStatus = JSON.parse(jsonStatus).status;
   }
 
   /** 
    * Get transcript as plain text
    */
   //var transcriptText = await client.getTranscriptText(job.id);
-  var transcriptText = getTranscript(id);
+  var transcriptText = getTranscript(job.id);
+  processTextFunction(transcriptText.toString());
   console.log(transcriptText);
   console.log("---------- done uploading to API ----------");
 }

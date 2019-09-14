@@ -54,7 +54,7 @@ iterateAndApply = function (list, function_to_apply) {
     return new_list;
 };
 
-(() => {
-    var sample = "Hi, this new recording. Um, I got, I got a filler word in there. Uh, another one, the C, I'm trying to avoid the killer words."
-    processTextFunction(sample)
-})();
+// (() => {
+//     var sample = "Hi, this new recording. Um, I got, I got a filler word in there. Uh, another one, the C, I'm trying to avoid the killer words."
+//     processTextFunction(sample)
+// })();
