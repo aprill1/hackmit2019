@@ -10,6 +10,7 @@
   
   body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* font-family: 'Comfortaa', cursive; */
     font-size: 0.8rem;
   }
   
@@ -23,7 +24,16 @@
     font-size: 2rem;
     text-align: center;
     font-weight: normal;
+    padding: 2rem 0 0 0;
+    margin: 0;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: normal;
     padding: 0.5rem 0 0 0;
+    margin: 0;
   }
   
   .main-controls {
@@ -39,6 +49,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 0px 50px;
   }
   
   #buttons button {
