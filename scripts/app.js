@@ -1,5 +1,5 @@
 /**
- * Contributors: April Xie, Brian Hoh, Carlos Tervino, Yaseen Alkhafaji
+ * Contributors: April Xie, Brian Hoh, Carlos Trevino, Yaseen Alkhafaji
  * 
  * Used code from https://github.com/mdn/web-dictaphone
  */
@@ -9,6 +9,7 @@
 var record = document.querySelector('.record');
 var stop = document.querySelector('.stop');
 var soundClips = document.querySelector('.sound-clips');
+var speechAnalysis = document.querySelector('.speech-analysis');
 var canvas = document.querySelector('.visualizer');
 var mainSection = document.querySelector('.main-controls');
 

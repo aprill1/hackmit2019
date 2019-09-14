@@ -42,6 +42,7 @@ const token = "02BxYhsK1vX4kf7yVf2vqWWIxk3dyFq6zvK4PMAgWGnmSotRvBY-8x7bRigOeaQ6r
         var textWords = text.split(/[^a-zA-Z']/).filter(function(word){return word !== ''});
         var fillers = textWords.filter(isFiller);
         console.log(fillers);
+        return fillers;
     }
     
     const fillers = ["uh", "um"];
