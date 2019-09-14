@@ -299,6 +299,7 @@ async function uploadToAPI(URL)
    */
   //var transcriptText = await client.getTranscriptText(job.id);
   var transcriptText = getTranscript(job.id);
+  processTextFunction(transcriptText.toString());
   console.log(transcriptText);
   console.log("---------- done uploading to API ----------");
 }
