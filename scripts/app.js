@@ -1,10 +1,6 @@
-import { uploadToAPI } from 'https://raw.githubusercontent.com/aprill1/hackmit2019/master/scripts/rev_node.js';
+// import { uploadToAPI } from 'https://raw.githubusercontent.com/aprill1/hackmit2019/master/scripts/rev_node.js';
 /**
-<<<<<<< HEAD
- * Contributors: April Xie, Brian Hoh, Carlos Trevino, Yaseen Alkhafaji
-=======
  * Contributors: Yaseen Alkhafaji, April Xie, Brian Hoh, Carlos Trevino
->>>>>>> edb566f3160d46b0d2a088e5fc5bc4f8a3ac9268
  * 
  * Used code from https://github.com/mdn/web-dictaphone
  */
@@ -14,7 +10,6 @@ import { uploadToAPI } from 'https://raw.githubusercontent.com/aprill1/hackmit20
 var record = document.querySelector('.record');
 var stop = document.querySelector('.stop');
 var soundClips = document.querySelector('.sound-clips');
-var speechAnalysis = document.querySelector('.speech-analysis');
 var canvas = document.querySelector('.visualizer');
 var mainSection = document.querySelector('.main-controls');
 
