@@ -9,31 +9,51 @@
   }
   
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    /* font-family: 'Comfortaa', cursive; */
+    font-family: 'Montserrat', 'Helvetica Neue', 'Helvetica', sans-serif;
     font-size: 0.8rem;
   }
+
+  input {
+    width: 50%;
+  }
   
+  .inline {
+    padding: 3px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+  }
+
   .wrapper {
     height: 100%;
     display: flex;
     flex-direction: column;
   }
+
+  .field {
+      margin: 20 px;
+      text-align: center;
+  }
   
-  h1, h2 {
-    font-size: 2rem;
+  h1, h2, h3 {
     text-align: center;
-    font-weight: normal;
-    padding: 2rem 0 0 0;
+    font-weight: bold;
     margin: 0;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    padding: 2rem 0 0 0;
+  }
+
+  h2 {
+    font-size: 2rem;
+    padding: 2rem 0 0 0;
   }
 
   h3 {
     font-size: 1.5rem;
-    text-align: center;
-    font-weight: normal;
     padding: 0.5rem 0 0 0;
-    margin: 0;
   }
   
   .main-controls {
@@ -85,6 +105,7 @@
   .sound-clips {
     flex: 1;
     overflow: auto;
+    margin: 0 10px;
   }
   
   section, article {
@@ -117,22 +138,6 @@
     font-size: 0.8rem;
   }
   
-  /* Checkbox hack to control information box display */
-  
-  label {
-    font-size: 3rem;
-    position: absolute;
-    top: 2px;
-    right: 3px;
-    z-index: 5;
-    cursor: pointer;
-  }
-  
-  input[type=checkbox] {
-     position: absolute;
-     top: -100px;
-  }
-  
   aside {
     position: fixed;
     top: 0;
@@ -152,11 +157,6 @@
   
   aside a {
     color: #666;
-  }
-  
-  /* Toggled State of information box */
-  input[type=checkbox]:checked ~ aside {
-    transform: translateX(0);
   }
   
   /* Cursor when clip name is clicked over */

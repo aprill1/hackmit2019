@@ -1,16 +1,21 @@
 var speechAnalysis = document.querySelector('.speech-analysis');
+const defaultFillers = ["uh", "um"];
+var additionalFillers = [];
+
+addToFillers = function (fillers) {
+    additionalFillers = fillers;
+}
 
 processTextFunction = function (inputText) {
+    var trackedFillers = defaultFillers.concat(additionalFillers);
     function getFillerWords(text) {
         var textWords = text.split(/[^a-zA-Z']/).filter(function(word){return word !== ''});
         var fillers = textWords.filter(isFiller);
         return fillers;
     };
-    
-    const fillers = ["uh", "um"];
 
     function isFiller(word) {
-        return fillers.includes(word.toLowerCase());
+        return trackedFillers.includes(word.toLowerCase());
     };
 
     fillers_found = getFillerWords(inputText);
@@ -21,7 +26,7 @@ processTextFunction = function (inputText) {
     frequencies.forEach(
         function logMapElements(value, key, map) {
             var fillerDisplay = document.createElement('h3');
-            fillerDisplay.textContent = `You said "${key}" ${value} time${value > 1 ? 's' : ''}`;
+            fillerDisplay.textContent = `You said "${key}" ${value} time${value !== 1 ? 's' : ''}`;
             fillers_div.appendChild(fillerDisplay);
           }          
     );
