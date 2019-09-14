@@ -32,6 +32,22 @@
     font-weight: normal;
     padding: 0.5rem 0 0 0;
   }
+
+  main {
+    position: relative;
+    text-align: center;
+    top: calc(var(--short) / 2);
+    left: 0;
+    right: 0;
+  }
+
+  video {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    display: none;
+  }
   
   .main-controls {
     padding: 0.5rem 0;

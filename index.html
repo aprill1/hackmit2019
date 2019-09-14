@@ -15,6 +15,13 @@
     <h1>Public Speaking Coach</h1>
     <h2>Analyze your speech!</h2>
 
+    <main id="main">
+        <div class="v-wrapper">
+            <video id="video" playsinline controls="true"> </video>
+            <canvas id="output"></canvas>
+        </div>
+    </main>
+
     <section class="main-controls">
         <canvas class="visualizer" style="display: none" height="60px"></canvas>
         <div id="buttons">
@@ -40,5 +47,6 @@
     <script src="scripts/app.js"></script>
     <script type="module" src="rev_node.js"></script>
     <script src="scripts/text_processing.js"></script>
+    <script type="module" src="scripts/camera-util.js"></script>
   </body>
 </html>
