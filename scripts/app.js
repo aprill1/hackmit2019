@@ -1,4 +1,4 @@
-import { uploadToAPI } from 'https://raw.githubusercontent.com/aprill1/hackmit2019/master/scripts/rev_node.js';
+// import { uploadToAPI } from 'https://raw.githubusercontent.com/aprill1/hackmit2019/master/scripts/rev_node.js';
 /**
  * Contributors: Yaseen Alkhafaji, April Xie, Brian Hoh, Carlos Trevino
  * 
