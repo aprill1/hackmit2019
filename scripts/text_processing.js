@@ -21,7 +21,7 @@ processTextFunction = function (inputText) {
     frequencies.forEach(
         function logMapElements(value, key, map) {
             var fillerDisplay = document.createElement('h3');
-            fillerDisplay.textContent = `${key} = ${value}`;
+            fillerDisplay.textContent = `You said "${key}" ${value} time${value > 1 ? 's' : ''}`;
             fillers_div.appendChild(fillerDisplay);
           }          
     );

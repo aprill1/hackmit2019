@@ -8,19 +8,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="styles/app.css" rel="stylesheet" type="text/css">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet"> -->
 
     <title>Public Speaking Coach</title>
   </head>
   <body>
     <h1>Public Speaking Coach</h1>
     <h2>Analyze your speech!</h2>
-
-    <main id="main">
-        <div class="v-wrapper">
-            <video id="video" playsinline controls="true"> </video>
-            <canvas id="output"></canvas>
-        </div>
-    </main>
+    <h3>Click record to start recording, and then click stop when you're done talking.</h3>
 
     <section class="main-controls">
         <canvas class="visualizer" style="display: none" height="60px"></canvas>
@@ -47,6 +42,5 @@
     <script src="scripts/app.js"></script>
     <script type="module" src="rev_node.js"></script>
     <script src="scripts/text_processing.js"></script>
-    <script type="module" src="scripts/camera-util.js"></script>
   </body>
 </html>
