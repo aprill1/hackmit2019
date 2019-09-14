@@ -15,8 +15,17 @@ processTextFunction = function (inputText) {
 
     fillers_found = getFillerWords(inputText);
     frequencies = splitAndCount(fillers_found);
-    //Change to use frequencies map
-    return frequencies;
+
+    var fillers_div = document.createElement('div');
+    fillers_div.textContent = '';
+    frequencies.forEach(
+        function logMapElements(value, key, map) {
+            var fillerDisplay = document.createElement('h3');
+            fillerDisplay.textContent = `${key} = ${value}`;
+            fillers_div.appendChild(fillerDisplay);
+          }          
+    );
+    speechAnalysis.appendChild(fillers_div);
 };
 
 splitAndCount = function (list) {
@@ -42,14 +51,5 @@ iterateAndApply = function (list, function_to_apply) {
 
 (() => {
     var sample = "Hi, this new recording. Um, I got, I got a filler word in there. Uh, another one, the C, I'm trying to avoid the killer words."
-    var fillers = document.createElement('div');
-    fillers.textContent = '';
-    processTextFunction(sample).forEach(
-        function logMapElements(value, key, map) {
-            var fillerDisplay = document.createElement('h3');
-            fillerDisplay.textContent = `${key} = ${value}`;
-            fillers.appendChild(fillerDisplay);
-          }          
-    );
-    speechAnalysis.appendChild(fillers);
+    processTextFunction(sample)
 })();
