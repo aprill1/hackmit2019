@@ -2,16 +2,39 @@ processTextFunction = function (inputText) {
     function getFillerWords(text) {
         var textWords = text.split(/[^a-zA-Z']/).filter(function(word){return word !== ''});
         var fillers = textWords.filter(isFiller);
-        console.log(fillers);
-    }
+        return fillers;
+    };
     
     const fillers = ["uh", "um"];
 
     function isFiller(word) {
         return fillers.includes(word.toLowerCase());
-    }
+    };
 
-    getFillerWords(inputText);
+    fillers_found = getFillerWords(inputText);
+    frequencies = splitAndCount(fillers_found);
+    console.log(frequencies);
+};
+
+splitAndCount = function (list) {
+	frequencies = new Map();
+	unique_elements = new Set(list);
+	for (element of unique_elements) {
+		frequencies.set(element, countFrequency(list, element));
+	}
+	return frequencies;
+};
+
+countFrequency = function (list, element) {
+	return list.filter(x => x === element).length;
+};
+
+iterateAndApply = function (list, function_to_apply) {
+	new_list = []
+	for (let i = 0; i < list.length; i++) {
+		new_list.push(function_to_apply(list[i]));
+	}
+	return new_list;
 };
 
 (() => {
