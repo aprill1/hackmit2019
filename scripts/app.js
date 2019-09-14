@@ -53,12 +53,9 @@ if (navigator.mediaDevices.getUserMedia) {
       console.log("recorder stopped");
       record.style.background = "";
       record.style.color = "";
-      // mediaRecorder.requestData();
 
       stop.disabled = true;
       record.disabled = false;
-
-      // processTextFunction here
     }
 
     track.onclick = function() {
