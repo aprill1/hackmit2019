@@ -1,5 +1,10 @@
+import { uploadToAPI } from 'https://raw.githubusercontent.com/aprill1/hackmit2019/master/scripts/rev_node.js';
 /**
+<<<<<<< HEAD
  * Contributors: April Xie, Brian Hoh, Carlos Trevino, Yaseen Alkhafaji
+=======
+ * Contributors: Yaseen Alkhafaji, April Xie, Brian Hoh, Carlos Trevino
+>>>>>>> edb566f3160d46b0d2a088e5fc5bc4f8a3ac9268
  * 
  * Used code from https://github.com/mdn/web-dictaphone
  */
@@ -88,6 +93,7 @@ if (navigator.mediaDevices.getUserMedia) {
       chunks = [];
       var audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
+      console.log(audioURL);
       console.log("recorder stopped");
 
       deleteButton.onclick = function(e) {
@@ -104,6 +110,8 @@ if (navigator.mediaDevices.getUserMedia) {
           clipLabel.textContent = newClipName;
         }
       }
+
+      uploadToAPI(audio.src);
     }
 
     mediaRecorder.ondataavailable = function(e) {
