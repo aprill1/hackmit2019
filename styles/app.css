@@ -30,6 +30,10 @@
     flex-direction: column;
   }
 
+  .transcription-status {
+    color: red;
+  }
+
   .field {
       margin: 20 px;
       text-align: center;

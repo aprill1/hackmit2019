@@ -15,7 +15,7 @@ processTextFunction = function (inputText) {
     };
 
     function isFiller(word) {
-        return trackedFillers.includes(word.toLowerCase());
+        return trackedFillers.includes(word);
     };
 
     fillers_found = getFillerWords(inputText);
@@ -45,16 +45,3 @@ splitAndCount = function (list) {
 countFrequency = function (list, element) {
     return list.filter(x => x === element).length;
 };
-
-iterateAndApply = function (list, function_to_apply) {
-    new_list = []
-    for (let i = 0; i < list.length; i++) {
-        new_list.push(function_to_apply(list[i]));
-    }
-    return new_list;
-};
-
-// (() => {
-//     var sample = "Hi, this new recording. Um, I got, I got a filler word in there. Uh, another one, the C, I'm trying to avoid the killer words."
-//     processTextFunction(sample)
-// })();

@@ -14,6 +14,7 @@ var soundClips = document.querySelector('.sound-clips');
 var canvas = document.querySelector('.visualizer');
 var mainSection = document.querySelector('.main-controls');
 var track = document.querySelector('.track');
+var transcriptionStatus = document.querySelector('.transcription-status');
 
 // disable stop button while not recording
 
@@ -38,6 +39,16 @@ if (navigator.mediaDevices.getUserMedia) {
     visualize(stream);
 
     record.onclick = function() {
+      document.querySelectorAll('.transcription-status h2').forEach(
+          function(el) {
+              el.remove();
+          }
+      );
+      document.querySelectorAll('.speech-analysis h3').forEach(
+          function(el) {
+              el.remove();
+          }
+      );
       mediaRecorder.start();
       console.log(mediaRecorder.state);
       console.log("recorder started");
@@ -60,7 +71,7 @@ if (navigator.mediaDevices.getUserMedia) {
 
     track.onclick = function() {
         var input = document.querySelector('input');
-        var wordToTrack = [input.value];
+        var wordToTrack = [input.value.toLowerCase()];
         input.value = '';
         addToFillers(wordToTrack);
     }
@@ -113,6 +124,10 @@ if (navigator.mediaDevices.getUserMedia) {
           clipLabel.textContent = newClipName;
         }
       };
+
+      var transcribingNotification = document.createElement('h2');
+      transcribingNotification.textContent = "transcribing...";
+      transcriptionStatus.appendChild(transcribingNotification);
 
       (async() => {
         await uploadToAPI(blob);
@@ -295,8 +310,9 @@ async function uploadToAPI(URL)
    * Get transcript as plain text
    */
   //var transcriptText = await client.getTranscriptText(job.id);
-  var transcriptText = getTranscript(job.id);
-  processTextFunction(transcriptText.toString());
-  console.log(transcriptText);
+  var transcriptText = await getTranscript(job.id);
+  document.querySelector('.transcription-status h2').textContent += "done!";
+  transcriptText = transcriptText.split("    ")[2].toLowerCase();
+  processTextFunction(transcriptText);
   console.log("---------- done uploading to API ----------");
 }
