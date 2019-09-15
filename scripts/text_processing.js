@@ -22,14 +22,20 @@ processTextFunction = function (inputText) {
     frequencies = splitAndCount(fillers_found);
 
     var fillers_div = document.createElement('div');
-    fillers_div.textContent = '';
-    frequencies.forEach(
-        function logMapElements(value, key, map) {
-            var fillerDisplay = document.createElement('h3');
-            fillerDisplay.textContent = `You said "${key}" ${value} time${value !== 1 ? 's' : ''}`;
-            fillers_div.appendChild(fillerDisplay);
-          }          
-    );
+    // fillers_div.textContent = '';
+    if (fillers_found.length === 0) {
+        var noFillers = document.createElement('h3');
+        noFillers.textContent = "None :)";
+        fillers_div.appendChild(noFillers);
+    } else {
+        frequencies.forEach(
+            function logMapElements(value, key, map) {
+                var fillerDisplay = document.createElement('h3');
+                fillerDisplay.textContent = `You said "${key}" ${value} time${value !== 1 ? 's' : ''}`;
+                fillers_div.appendChild(fillerDisplay);
+            }          
+        );
+    }
     speechAnalysis.appendChild(fillers_div);
 };
 
